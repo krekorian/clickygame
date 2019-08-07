@@ -36,7 +36,7 @@ class App extends Component {
           console.log(logos[index].guessed)
           this.setState({
             logos: shuffle(logos), function() {
-              console.log("asfdasf");
+              console.log("shuffle");
             }
           });
           this.setState({ score: this.state.score + 1 }, function () {
@@ -46,10 +46,15 @@ class App extends Component {
             console.log("Correct guess");
           });
 
-          if (this.state.score >= this.state.highscore) {
+          if (this.state.score >= this.state.highscore && this.state.score < 12) {
             this.setState({ highscore: this.state.highscore + 1 }, function () {
               console.log("adding to highscore");
             });
+          }
+
+          if (this.state.score === 12) {
+            alert("You got all correct");
+            this.resetScore();
           }
           return true
         } else {
@@ -71,6 +76,11 @@ class App extends Component {
   }
 
   resetScore = () => {
+    // this.setState({
+    //   logos: shuffle(logos), function() {
+    //     console.log("shuffle");
+    //   }
+    // });
     this.setState({ score: 0 }, function () {
       console.log("resetting score");
     });
@@ -80,6 +90,7 @@ class App extends Component {
     this.state.logos.forEach(element => {
       element.guessed = false;
     });
+
   }
 
 
